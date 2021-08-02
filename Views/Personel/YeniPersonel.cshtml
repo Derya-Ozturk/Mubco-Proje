@@ -1,0 +1,28 @@
+﻿@model Mubco_Proje.Models.Personel
+@{
+    ViewData["Title"] = "YeniPersonel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-select" method="post">
+    <br />
+    <b>Personel Ad</b>
+    <br />
+    @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+    <br />
+    <b>Personel Soyad</b>
+    <br />
+    @Html.TextBoxFor(x => x.Soyad, new { @class = "form-control" })
+    <br />
+    <b>Şehir</b>
+    <br />
+    @Html.TextBoxFor(x => x.Sehir, new { @class = "form-control" })
+    <br />
+    <b>Birim</b>
+    <br />
+    @Html.TextBoxFor(x => x.Birim, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info">Yeni Personel Ekle</button>
+</form>
+
+

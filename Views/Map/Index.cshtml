@@ -1,0 +1,75 @@
+﻿@model Mubco_Proje.Models.Map
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmMmCUk97DukA5aZigDFpRw4F1u22v1o4&callback=initMap" async defer></script>
+
+@using (Html.BeginForm("Location", "Map", FormMethod.Post))
+{
+    <div class="col-lg-7" id="dvMap" style="height:500px; width:800px;"> </div>
+
+    <div class="form-group">
+        @*<form class="form-select" method="post">*@
+
+        <div class="col-lg-9 col-md-8">
+            <h3>Personel Toplantı Yeri Ayarla</h3>
+            <br />
+            @Html.TextBoxFor(model => model.CityName, new { @class = "form-control" })
+            <br />
+            @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+            <br />
+            @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+            <br />
+            @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+            <br />
+            <a href="/Map/Location/" class="btn btn-info">Lokasyon Ekle</a>
+
+        </div>
+        @*</form>*@
+    </div>
+}
+
+
+<script type="text/javascript">
+
+    function initMap() {
+        //map..
+        var map = new google.maps.Map(document.getElementById('dvMap'), {
+            center: {
+                lat: 41.008240,
+                lng: 28.978359
+            },
+            zoom: 15
+        });
+        //marker..
+        var marker = new google.maps.Marker({
+            position: {
+                lat: 41.008240,
+                lng: 28.978359
+            },
+            map: map,
+            draggable: true,
+        });
+
+        //dragend event of marker
+        google.maps.event.addListener(marker, 'dragend', function () {
+            var Latitudes = marker.getPosition().lat();
+            var Longitudes = marker.getPosition().lng();
+
+            $('#Latitude').val(Latitudes);
+            $('#Longitude').val(Longitudes);
+
+        });
+
+        
+    }
+</script>
+

@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/fullcalendar/lib/main.css" rel="stylesheet" />
+<script src="~/fullcalendar/lib/main.js"></script>
+<script src="~/fullcalendar/lib/locales-all.js"></script>
+<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            initialDate: '2021-31-07',
+            locale: "tr",
+            navLinks: true,
+            selectable: true,
+            selectMirror: true,
+            select: function (arg) {
+                var title = prompt('Etkinlik Başlığı:');
+                if (title) {
+                    calendar.addEvent({
+                        title: title,
+                        start: arg.start,
+                        end: arg.end,
+                        allDay: arg.allDay
+                    })
+                }
+                calendar.unselect()
+            },
+            eventClick: function (arg) {
+                if (confirm('Bu etkinliği silmek istediğinizden emin misiniz?')) {
+                    arg.event.remove()
+                }
+            },
+            editable: true,
+            dayMaxEvents: true,
+            events: "/Calendar/EtkinlikleriGetir/"
+        });
+
+        calendar.render();
+    });</script>
+
+<div class="container">
+    <br />
+    <div id="calendar"></div>
+</div>
+

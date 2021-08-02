@@ -1,0 +1,31 @@
+﻿@model Mubco_Proje.Models.Personel
+@{
+    ViewData["Title"] = "PersonelGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("PersonelGuncelle", "Personel", FormMethod.Post))
+{
+    <br />
+    <b>Personel ID</b>
+    @Html.TextBoxFor(x => x.PerID, new { @class = "form-control" })
+    <br />
+    <b>Personel Ad</b>
+    <br />
+    @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+    <br />
+    <b>Personel Soyad</b>
+    <br />
+    @Html.TextBoxFor(x => x.Soyad, new { @class = "form-control" })
+    <br />
+    <b>Şehir</b>
+    <br />
+    @Html.TextBoxFor(x => x.Sehir, new { @class = "form-control" })
+    <br />
+    <b>Birim</b>
+    <br />
+    @Html.TextBoxFor(x => x.Birim, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info">Personel Güncelle</button>
+}
+
